@@ -62,24 +62,97 @@ FUNC_GET_CLAIMTOKEN(){
 
 
 FUNC_SETUP_NETDATA(){
+
+    echo -e "${GREEN}#########################################################################"
+    echo -e "${GREEN}## INSTALLING NETDATA WITH CLAIM-TOKEN...${NC}"
     
-    echo "installing with claim-token id : $_INPUT"
+    
+    #echo "installing with claim-token id : $_INPUT"
+
+
+
+    sudo curl https://my-netdata.io/kickstart.sh > /tmp/netdata-kickstart.sh && sh /tmp/netdata-kickstart.sh  --stable-channel --disable-telemetry --non-interactive \
+    --claim-token $_INPUT \
+    --claim-url https://app.netdata.cloud
+
+
+
+    sudo cp /usr/lib/netdata/conf.d/apps_groups.conf /etc/netdata/apps_groups.conf
+    NDATA_CONF_FILE="/etc/netdata/netdata.conf"
+    NDATA_APPS_FILE="/etc/netdata/apps_groups.conf"
+
+    sudo sed -i.bak '/^.*history*/a \\n    process scheduling policy = idle\n    OOM score = 1000\n\n    dbengine multihost disk space = 1978\n    update every = 5\n\n[web]\n    web files owner = root\n    web files group = netdata\n\n    bind to = localhost' $NDATA_CONF_FILE
+    sudo sed -i.bak '/^freeswitch*/a \\npli-node: plugin* *2_nodeStartPM2* *startNode*\npli-ei: external-initiator* *3_initiatorStartPM2* *startEI*' $NDATA_APPS_FILE
+    sudo systemctl unmask netdata.service
+    sudo systemctl restart netdata
+
+    sudo systemctl status netdata
+ 
     FUNC_EXIT;
 }
 
 
 
 FUNC_RECLAIM_TOKEN(){
+
+    echo -e "${GREEN}#########################################################################"
+    echo -e "${GREEN}## PERFORMING NETDATA NODE RECLAIM...${NC}"
     
-    echo "performing node reclaim process"
+    #echo "performing node reclaim process"
+
+    sudo rm -f /var/lib/netdata/registry/netdata.public.unique.id
+    sudo systemctl restart netdata
+
     FUNC_EXIT;
 }
 
 
 
 FUNC_RESET_NETDATA(){
+
+    echo -e "${GREEN}#########################################################################"
+    echo -e "${GREEN}## PERFORMING NETDATA UNINSTALL...${NC}"
     
-    echo "performing netdata reset process"
+    #echo "performing netdata reset process"
+
+
+cd /etc/netdata
+sudo wget https://raw.githubusercontent.com/netdata/netdata/master/packaging/installer/netdata-uninstaller.sh && sudo chmod +x ./netdata-uninstaller.sh
+sudo ./netdata-uninstaller.sh --yes 
+
+
+
+    cd ~/
+    sudo rm -rf /var/lib/netdata && sudo rm -rf /var/log/netdata
+    sudo rm -rf /var/cache/apt/archives/netdata*
+    sudo rm -f /var/lib/apt/lists/packagecloud.io_netdata_netdata*
+    sudo rm -f /var/lib/dpkg/info/netdata-repo*
+    sudo rm -rf /var/lib/netdata
+    sudo rm -rf /var/cache/netdata/
+    sudo rm -f /var/lib/systemd/deb-systemd-helper-masked/netdata*
+    sudo rm -f /etc/apt/sources.list.d/netdata*
+    sudo rm -f /etc/netdata/.install-type
+    sudo rm -f /var/lib/dpkg/info/netdata*
+    sudo rm -rf /etc/netdata
+    
+    
+    sudo rm -f /etc/apt/trusted.gpg.d/netdata-archive-keyring.gpg
+    sudo rm -f /etc/apt/trusted.gpg.d/netdata-edge-archive-keyring.gpg
+    sudo rm -f /etc/apt/trusted.gpg.d/netdata-repoconfig-archive-keyring.gpg
+    sudo rm -f /etc/cron.daily/netdata-updater
+    sudo rm -f /etc/default/netdata
+    sudo rm -f /etc/init.d/netdata
+    sudo rm -f /etc/logrotate.d/netdata
+    sudo rm -f /etc/rc2.d/S01netdata
+    sudo rm -f /etc/rc3.d/S01netdata
+    sudo rm -f /etc/rc4.d/S01netdata
+    sudo rm -f /etc/rc5.d/S01netdata
+    sudo rm -f /etc/systemd/system/multi-user.target.wants/netdata.service
+    sudo rm -f /etc/systemd/system/netdata.service
+    sudo rm -rf /usr/libexec/netdata
+    sudo rm -f /var/lib/systemd/deb-systemd-helper-enabled/multi-user.target.wants/netdata.service
+    sudo rm -f /var/lib/systemd/deb-systemd-helper-enabled/netdata.service.dsh-also
+    
     FUNC_EXIT;
 }
 
