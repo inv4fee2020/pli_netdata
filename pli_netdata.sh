@@ -49,8 +49,13 @@ FUNC_GET_CLAIMTOKEN(){
                 echo "timed out waiting for user response - exiting..."
                 FUNC_EXIT;
             elif [[ $_INPUT != '' ]] && [[ ${#_INPUT} == 135 ]]; then
-                echo "token id length is valid"
-                echo "the claim-token id entered is : $_INPUT"
+                echo 
+                echo
+                echo -e "${GREEN}## the provided claim token appears valid${NC}"
+                echo
+                echo -e "${GREEN}## proceeding to install netdata..."
+                echo 
+                echo
                 FUNC_SETUP_NETDATA;
             else
                 echo "token id invalid, please check and retry - exiting.."
