@@ -126,13 +126,13 @@ FUNC_RESET_NETDATA(){
     sudo wget https://raw.githubusercontent.com/netdata/netdata/master/packaging/installer/netdata-uninstaller.sh && sudo chmod +x ./netdata-uninstaller.sh
     sudo ./netdata-uninstaller.sh --yes
 
-    if [ $? != 0 ]; then
-      echo
-      echo "ERROR :: Error running uninstall script.. exiting"
-      echo 
-      FUNC_ERR_EXIT;
-      sleep 2s
-    fi
+    #if [ $? != 0 ]; then
+    #  echo
+    #  echo "ERROR :: Error running uninstall script.. exiting"
+    #  echo 
+    #  FUNC_ERR_EXIT;
+    #  sleep 2s
+    #fi
 
     echo -e "${GREEN}## PERFORMING NETDATA FOLDER CLEANUP...${NC}"
     echo 
@@ -146,11 +146,10 @@ FUNC_RESET_NETDATA(){
     sudo rm -rf /var/cache/netdata/
     sudo rm -f /var/lib/systemd/deb-systemd-helper-masked/netdata*
     sudo rm -f /etc/apt/sources.list.d/netdata*
-    sudo rm -f /etc/netdata/.install-type
     sudo rm -f /var/lib/dpkg/info/netdata*
     sudo rm -rf /etc/netdata
-    
-    
+    sudo rm -rf /opt/netdata
+
     sudo rm -f /etc/apt/trusted.gpg.d/netdata-archive-keyring.gpg
     sudo rm -f /etc/apt/trusted.gpg.d/netdata-edge-archive-keyring.gpg
     sudo rm -f /etc/apt/trusted.gpg.d/netdata-repoconfig-archive-keyring.gpg
