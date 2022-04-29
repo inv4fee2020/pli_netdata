@@ -107,7 +107,10 @@ FUNC_RECLAIM_TOKEN(){
     #echo "performing node reclaim process"
 
     sudo rm -f /var/lib/netdata/registry/netdata.public.unique.id
+    echo
+    echo -e "${GREEN}## RESTARTING NETDATA SERVICE...${NC}"
     sudo systemctl restart netdata
+    sudo systemctl status netdata
 
     FUNC_EXIT;
 }
