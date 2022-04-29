@@ -10,7 +10,7 @@ A brief guide on how to install and configure Netdata to your @GoPlugin node for
 
   3. Obtain the 'claim-token' for your space by selecting 'Manage Space' -> 'Nodes' tab & under the 'Connect nodes to _\_your\__ space'  You will see two code boxes - one using the wget command & the other for using the curl command.
 
-  4. From either of these code boxes we want to select the 'claim-token' text only.
+  4. From either of these code boxes we want to select the _*\'--claim-token\'*_ text only.
 
   From the below example text, you can see the at the end of the first line the _*\'--claim-token\'*_ word. This marks the start of the text selection that we want.  We select the token string all the way up to the start of the _*\'--claim-rooms\'*_ word.
 
