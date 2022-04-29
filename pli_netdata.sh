@@ -79,3 +79,7 @@ FUNC_ERR_EXIT(){
         return
     fi
 }
+
+
+FUNC_PKG_CHECK
+FUNC_GET_CLAIMTOKEN
