@@ -55,6 +55,7 @@ FUNC_GET_CLAIMTOKEN(){
             else
                 echo "token id invalid, please check and retry - exiting.."
                 FUNC_ERR_EXIT;
+                break
             fi
         done
 }
