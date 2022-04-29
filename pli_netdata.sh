@@ -42,7 +42,8 @@ FUNC_GET_CLAIMTOKEN(){
 
     echo -e "${GREEN}#########################################################################"
     echo -e "${GREEN}## PROMPT FOR NETDATA SPACE CLAIM-TOKEN...${NC}"
-    
+    echo
+    echo
         while true; do
             read -t30 -r -p "Please enter the '--claim-token' value from the Netdata portal: " _INPUT
             if [ $? -gt 128 ]; then
