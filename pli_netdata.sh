@@ -126,6 +126,14 @@ FUNC_RESET_NETDATA(){
     sudo wget https://raw.githubusercontent.com/netdata/netdata/master/packaging/installer/netdata-uninstaller.sh && sudo chmod +x ./netdata-uninstaller.sh
     sudo ./netdata-uninstaller.sh --yes
 
+    if [ $? != 0 ]; then
+      echo
+      echo "ERROR :: Error running uninstall script.. exiting"
+      echo 
+      sleep 2s
+      FUNC_ERR_EXIT;
+      break
+    fi
 
     echo -e "${GREEN}## PERFORMING NETDATA FOLDER CLEANUP...${NC}"
     echo 
