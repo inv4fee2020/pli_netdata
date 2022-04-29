@@ -42,4 +42,8 @@ The following steps will now setup your VPS to report data into your Netdata 'Ge
             echo
 
 
-  3. Lets run the script
+  3. Lets run the script to begin the installation - you should have your claim-token at the ready;
+
+            ./pli_netdata -setup
+
+  4. 

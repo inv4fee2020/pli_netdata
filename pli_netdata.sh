@@ -124,7 +124,7 @@ FUNC_RESET_NETDATA(){
 
     cd /etc/netdata
     sudo wget https://raw.githubusercontent.com/netdata/netdata/master/packaging/installer/netdata-uninstaller.sh && sudo chmod +x ./netdata-uninstaller.sh
-    sudo ./netdata-uninstaller.sh --yes < y
+    sudo ./netdata-uninstaller.sh --yes
 
 
     echo -e "${GREEN}## PERFORMING NETDATA FOLDER CLEANUP...${NC}"
