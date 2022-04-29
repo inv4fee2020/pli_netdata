@@ -52,6 +52,9 @@ FUNC_GET_CLAIMTOKEN(){
                 echo "token id length is valid"
                 echo "the claim-token id entered is : $_INPUT"
                 FUNC_SETUP_NETDATA;
+            else
+                echo "token id invalid, please check and retry - exiting.."
+                FUNC_ERR_EXIT;
             fi
         done
 }
