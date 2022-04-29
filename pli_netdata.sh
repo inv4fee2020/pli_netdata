@@ -121,7 +121,7 @@ FUNC_RESET_NETDATA(){
     echo 
     #echo "performing netdata reset process"
 
-
+    sudo rm -f /etc/netdata/netdata-uninstaller.sh
     cd /etc/netdata
     sudo wget https://raw.githubusercontent.com/netdata/netdata/master/packaging/installer/netdata-uninstaller.sh && sudo chmod +x ./netdata-uninstaller.sh
     sudo ./netdata-uninstaller.sh --yes
