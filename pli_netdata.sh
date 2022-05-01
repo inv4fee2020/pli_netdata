@@ -111,7 +111,11 @@ FUNC_ENABLE_HEALTH_MON(){
 
     for i in "${HEALTH_CONFS[@]}"
     do
+        echo -e "${GREEN}## enabling health conf file : $i ${NC}"
         sudo cp /usr/lib/netdata/conf.d/health.d/$i /etc/netdata/health.d/$i
+        if [ $? == 1 ]; then
+           echo -e "${GREEN}## health conf file "$i" enabled successfully..${NC}"
+        fi
     done
 
     #sudo cp /usr/lib/netdata/conf.d/health.d/cpu.conf /etc/netdata/health.d/cpu.conf
@@ -126,6 +130,11 @@ FUNC_ENABLE_HEALTH_MON(){
     echo
     echo -e "${GREEN}## RELOADING HEALTH DATA TO ENABLE UPDATES...${NC}"
     sudo netdatacli reload-health
+    if [ $? == 1 ]; then
+        echo -e "${GREEN}## health monitor settings reloaded successfully..${NC}"
+    else
+        echo -e "${RED}## health monitor settings reloaded failed..${NC}"
+    fi
 
     FUNC_EXIT;
 }
