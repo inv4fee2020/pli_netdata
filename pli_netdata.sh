@@ -99,6 +99,40 @@ FUNC_SETUP_NETDATA(){
 
 
 
+FUNC_ENABLE_HEALTH_MON(){
+
+    echo -e "${GREEN}#########################################################################"
+    echo -e "${GREEN}## ENABLING NETDATA HEALTH MONITOR ALERTING...${NC}"
+    
+    #echo "copies the default template conf file for common system metric"
+
+    HEALTH_CONFS=(cpu.conf memory.conf load.conf processes.conf disks.conf tcp_resets.conf tcp_conn.conf )
+
+
+    for i in "${HEALTH_CONFS[@]}"
+    do
+        sudo cp /usr/lib/netdata/conf.d/health.d/$i /etc/netdata/health.d/$i
+    done
+
+    #sudo cp /usr/lib/netdata/conf.d/health.d/cpu.conf /etc/netdata/health.d/cpu.conf
+    #sudo cp /usr/lib/netdata/conf.d/health.d/memory.conf /etc/netdata/health.d/memory.conf
+    #sudo cp /usr/lib/netdata/conf.d/health.d/load.conf /etc/netdata/health.d/load.conf
+    #sudo cp /usr/lib/netdata/conf.d/health.d/processes.conf /etc/netdata/health.d/processes.conf
+    #sudo cp /usr/lib/netdata/conf.d/health.d/disks.conf /etc/netdata/health.d/disks.conf
+    #sudo cp /usr/lib/netdata/conf.d/health.d/tcp_resets.conf /etc/netdata/health.d/tcp_resets.conf
+    #sudo cp /usr/lib/netdata/conf.d/health.d/tcp_conn.conf /etc/netdata/health.d/tcp_conn.conf
+    
+
+    echo
+    echo -e "${GREEN}## RELOADING HEALTH DATA TO ENABLE UPDATES...${NC}"
+    sudo netdatacli reload-health
+
+    FUNC_EXIT;
+}
+
+
+
+
 FUNC_RECLAIM_TOKEN(){
 
     echo -e "${GREEN}#########################################################################"
@@ -114,6 +148,7 @@ FUNC_RECLAIM_TOKEN(){
 
     FUNC_EXIT;
 }
+
 
 
 
@@ -196,6 +231,7 @@ FUNC_ERR_EXIT(){
 
 #FUNC_PKG_CHECK
 #FUNC_GET_CLAIMTOKEN
+#FUNC_ENABLE_HEALTH_MON
 
 
 case "$1" in
@@ -206,6 +242,10 @@ case "$1" in
         -reclaim)
                 #_OPTION="-conf"
                 FUNC_RECLAIM_TOKEN
+                ;;
+        -base-alerts)
+                #_OPTION="-conf"
+                FUNC_ENABLE_HEALTH_MON
                 ;;
         -reset)
                 #_OPTION="-conf"
@@ -219,10 +259,11 @@ case "$1" in
                 echo 
                 echo -e "${GREEN}where {function} is one of the following;${NC}"
                 echo 
-                echo -e "${GREEN}      -setup      ==  prompts for claim token id & installs netdata${NC}"
-                echo -e "${GREEN}      -reclaim    ==  removes the unique id to allow the node to be claimed again${NC}"
+                echo -e "${GREEN}      -setup       ==  prompts for claim token id & installs netdata${NC}"
+                echo -e "${GREEN}      -base-alerts ==  enables base system health monitor alerting${NC}"
+                echo -e "${GREEN}      -reclaim     ==  removes the unique id to allow the node to be claimed again${NC}"
                 echo 
-                echo -e "${GREEN}      -reset      ==  **CAUTION** performs a hard reset of the netdata install removing all files${NC}"
+                echo -e "${GREEN}      -reset       ==  **CAUTION** performs a hard reset of the netdata install removing all files${NC}"
                 #echo -e "${GREEN}      -scp       ==  displays the secure copy (scp) cmds to download backup files${NC}"
                 #echo
                 echo 
