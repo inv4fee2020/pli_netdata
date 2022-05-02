@@ -9,6 +9,7 @@ A brief guide on how to install and configure Netdata to your @GoPlugin node for
   1. Register for a new account with Netdata on their '[sign up page](https://app.netdata.cloud/?utm_source=website&utm_content=top_navigation_sign_up)'
 
   2. Enable email notifications by selecting 'Manage Space' -> 'Notifications' tab -> Email radio button
+        https://learn.netdata.cloud/docs/cloud/alerts-notifications/notifications
 
   3. Obtain the 'claim-token' for your space by selecting 'Manage Space' -> 'Nodes' tab & under the 'Connect nodes to _\_your\__ space'  You will see two code boxes - one using the wget command & the other for using the curl command.
 
