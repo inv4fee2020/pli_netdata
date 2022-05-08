@@ -52,11 +52,11 @@ The following steps will now setup your VPS to report data into your Netdata 'Ge
   4. You will be prompted to provide the _'--claim-token'_ from the previous section above;
 
 ```
-#########################################################################
-## PROMPT FOR NETDATA SPACE CLAIM-TOKEN...
-
-
-Please enter the '--claim-token' value from the Netdata portal:
+    #########################################################################
+    ## PROMPT FOR NETDATA SPACE CLAIM-TOKEN...
+    
+    
+    Please enter the '--claim-token' value from the Netdata portal:
 ```
 
 ---
