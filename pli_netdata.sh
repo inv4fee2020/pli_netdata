@@ -88,7 +88,7 @@ FUNC_SETUP_NETDATA(){
     NDATA_APPS_FILE="/etc/netdata/apps_groups.conf"
 
     sudo sed -i.bak '/^.*history*/a \\n    process scheduling policy = idle\n    OOM score = 1000\n\n    dbengine multihost disk space = 1978\n    update every = 5\n\n[web]\n    web files owner = root\n    web files group = netdata\n\n    bind to = localhost' $NDATA_CONF_FILE
-    sudo sed -i.bak '/^freeswitch*/a \\npli-node: plugin* *2_nodeStartPM2* *startNode*\npli-ei: external-initiator* *3_initiatorStartPM2* *startEI*' $NDATA_APPS_FILE
+    sudo sed -i.bak '/^freeswitch*/a \\npli-node: *2_nodeStartPM2* *startNode*\npli-ei: external-initiator* *3_initiatorStartPM2* *startEI*' $NDATA_APPS_FILE
     sudo systemctl unmask netdata.service
     sudo systemctl restart netdata
 
