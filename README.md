@@ -76,6 +76,9 @@ The following steps will now setup your VPS to report data into your Netdata 'Ge
     #########################################################################
     ## INSTALLING NETDATA WITH CLAIM-TOKEN...
 ```
+
+  5. While the script restarts the netdata services in order to load the new changes, it is strongly recommeneded that you perform a full reboot of your VPS.  This is due to scenarios where the detection of changes in the plugin processes do not trigger notifications. A reboot resolves this.
+
 ---
 
 
