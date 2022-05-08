@@ -93,7 +93,7 @@ FUNC_SETUP_NETDATA(){
     sudo systemctl restart netdata
 
     sudo systemctl status netdata
- 
+    sleep 3s
     FUNC_ENABLE_HEALTH_MON;
     #FUNC_EXIT;
 }
@@ -120,7 +120,7 @@ FUNC_ENABLE_HEALTH_MON(){
            echo -e "${GREEN}## health conf file "$i" enabled successfully..${NC}"
         fi
     done
-
+    sleeps 3s
     echo
     echo -e "${GREEN}## RELOADING HEALTH DATA TO ENABLE UPDATES...${NC}"
     sudo netdatacli reload-health
