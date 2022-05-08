@@ -94,7 +94,8 @@ FUNC_SETUP_NETDATA(){
 
     sudo systemctl status netdata
  
-    FUNC_EXIT;
+    FUNC_ENABLE_HEALTH_MON;
+    #FUNC_EXIT;
 }
 
 
@@ -106,26 +107,19 @@ FUNC_ENABLE_HEALTH_MON(){
     
     #echo "copies the default template conf file for common system metric"
 
-    HEALTH_CONFS=(cpu.conf memory.conf load.conf processes.conf disks.conf tcp_resets.conf tcp_conn.conf )
-
+    #HEALTH_CONFS=(cpu.conf memory.conf load.conf processes.conf disks.conf tcp_resets.conf tcp_conn.conf )
+    HEALTH_CONFS=(pli-node.conf pli-ei.conf)
 
     for i in "${HEALTH_CONFS[@]}"
     do
         echo -e "${GREEN}## enabling health conf file : $i ${NC}"
-        sudo cp /usr/lib/netdata/conf.d/health.d/$i /etc/netdata/health.d/$i
+        #sudo cp /usr/lib/netdata/conf.d/health.d/$i /etc/netdata/health.d/$i
+        sudo cp $i /etc/netdata/health.d/$i
+
         if [ $? == 0 ]; then
            echo -e "${GREEN}## health conf file "$i" enabled successfully..${NC}"
         fi
     done
-
-    #sudo cp /usr/lib/netdata/conf.d/health.d/cpu.conf /etc/netdata/health.d/cpu.conf
-    #sudo cp /usr/lib/netdata/conf.d/health.d/memory.conf /etc/netdata/health.d/memory.conf
-    #sudo cp /usr/lib/netdata/conf.d/health.d/load.conf /etc/netdata/health.d/load.conf
-    #sudo cp /usr/lib/netdata/conf.d/health.d/processes.conf /etc/netdata/health.d/processes.conf
-    #sudo cp /usr/lib/netdata/conf.d/health.d/disks.conf /etc/netdata/health.d/disks.conf
-    #sudo cp /usr/lib/netdata/conf.d/health.d/tcp_resets.conf /etc/netdata/health.d/tcp_resets.conf
-    #sudo cp /usr/lib/netdata/conf.d/health.d/tcp_conn.conf /etc/netdata/health.d/tcp_conn.conf
-    
 
     echo
     echo -e "${GREEN}## RELOADING HEALTH DATA TO ENABLE UPDATES...${NC}"
