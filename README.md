@@ -37,16 +37,20 @@ The following steps will now setup your VPS to report data into your Netdata 'Ge
 
   2. We now clone down the 'pli_netdata' scripts as follows;
 
-            cd $HOME
-            git clone https://github.com/inv4fee2020/pli_netdata.git
-            cd pli_netdata
-            chmod +x *.sh
-            echo
+```
+    cd $HOME
+    git clone https://github.com/inv4fee2020/pli_netdata.git
+    cd pli_netdata
+    chmod +x *.sh
+    echo
+```
 
 
   3. Lets run the script to begin the installation - you should have your claim-token at the ready;
 
-            ./pli_netdata -setup
+```
+    ./pli_netdata -setup
+```
 
 
   4. You will be prompted to provide the _'--claim-token'_ from the previous section above;
@@ -54,8 +58,8 @@ The following steps will now setup your VPS to report data into your Netdata 'Ge
 ```
     #########################################################################
     ## PROMPT FOR NETDATA SPACE CLAIM-TOKEN...
-    
-    
+
+
     Please enter the '--claim-token' value from the Netdata portal:
 ```
 
