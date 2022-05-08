@@ -4,6 +4,7 @@ Plugin node proactive monitoring with Netdata
 A brief guide on how to install and configure Netdata to your @GoPlugin node for proactive monitoring & alerting.
 
 
+
 ## Netdata : Register account & obtain 'claim-token'
 
   1. Register for a new account with Netdata on their '[sign up page](https://app.netdata.cloud/?utm_source=website&utm_content=top_navigation_sign_up)'
@@ -47,4 +48,31 @@ The following steps will now setup your VPS to report data into your Netdata 'Ge
 
             ./pli_netdata -setup
 
-  4. 
+
+  4. You will be prompted to provide the _'--claim-token'_ from the previous section above;
+
+```
+#########################################################################
+## PROMPT FOR NETDATA SPACE CLAIM-TOKEN...
+
+
+Please enter the '--claim-token' value from the Netdata portal:
+```
+
+---
+
+
+## Usage syntax
+
+Basic script syntax;
+
+    Usage: ./pli_netdata.sh {function}
+
+    where {function} is one of the following;
+
+          -setup       ==  prompts for claim token id & installs netdata
+          -base-alerts ==  enables base system health monitor alerting
+          -reclaim     ==  removes the unique id to allow the node to be claimed again
+
+          -reset       ==  **CAUTION** performs a hard reset of the netdata install removing all files
+
