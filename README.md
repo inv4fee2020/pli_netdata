@@ -54,6 +54,8 @@ The following steps will now setup your VPS to report data into your Netdata 'Ge
 
 
   4. You will be prompted to provide the _'--claim-token'_ from the previous section above;
+     Also note that the user input has a timeout.
+
 
 ```
     #########################################################################
@@ -63,6 +65,17 @@ The following steps will now setup your VPS to report data into your Netdata 'Ge
     Please enter the '--claim-token' value from the Netdata portal:
 ```
 
+   Immediately after entering the token, the script will check that the provided token is 135 characters in length. If valid the installation will continue as shown by the following messages and various components being downloaded;
+
+```
+    ## the provided claim token appears valid
+
+    ## proceeding to install netdata...
+
+
+    #########################################################################
+    ## INSTALLING NETDATA WITH CLAIM-TOKEN...
+```
 ---
 
 
