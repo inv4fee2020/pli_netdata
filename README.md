@@ -3,7 +3,9 @@ Plugin node proactive monitoring with Netdata
 
 A brief guide on how to install and configure Netdata to your @GoPlugin node for proactive monitoring & alerting.
 
+### Accompanying video for visual aid.
 
+[Youtube Playlist : Plugin ($PLI ) Node - Proactive Monitoring - UpTimeRobot & NetData](https://www.youtube.com/watch?v=3EcVNHADik0&list=PL2_76-uvpc8xr4h22XCpayMVgdKPbhy2b)
 
 ## Netdata : Register account & obtain 'claim-token'
 
