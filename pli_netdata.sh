@@ -122,7 +122,7 @@ FUNC_ENABLE_HEALTH_MON(){
 
 
     echo
-    sleeps 5s
+    sleep 3s
     echo -e "${GREEN}## RELOADING HEALTH DATA TO ENABLE UPDATES...${NC}"
     sudo netdatacli reload-health
     if [ $? == 0 ]; then
