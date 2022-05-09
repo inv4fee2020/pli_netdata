@@ -94,7 +94,7 @@ Assuming you have made no customisations since installing NetData, then by simpl
 1. This script updates the main 'netdata.conf' file to implement the following settings;
 
     - Sets polling to every 5 seconds (rather than the default every 1 second)
-    - Stores 30 days worth of data on the local disk which averages to about 2GB of data
+    - Stores 30 days worth of data on the local disk which averages to about 2GB of data using the '[Change how long Netdata stores metrics](https://learn.netdata.cloud/docs/store/change-metrics-storage)' page.
 
 
 2. The script updates the 'apps_groups.conf' file to implement the config to define the plugin processes. It does this by adding the following lines under the '# other application servers' section;
