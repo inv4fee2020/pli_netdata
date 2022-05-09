@@ -110,20 +110,19 @@ FUNC_ENABLE_HEALTH_MON(){
     #HEALTH_CONFS=(cpu.conf memory.conf load.conf processes.conf disks.conf tcp_resets.conf tcp_conn.conf )
     HEALTH_CONFS=(pli-node.conf pli-ei.conf)
 
-    for i in "${HEALTH_CONFS[@]}"
-    do
+    for i in "${HEALTH_CONFS[@]}"; do
         echo -e "${GREEN}## enabling health conf file : $i ${NC}"
         #sudo cp /usr/lib/netdata/conf.d/health.d/$i /etc/netdata/health.d/$i
         sudo cp $i /etc/netdata/health.d/$i
-
+    
         if [ $? == 0 ]; then
            echo -e "${GREEN}## health conf file "$i" enabled successfully..${NC}"
         fi
     done
 
-    sleeps 3s
-    
+
     echo
+    sleeps 5s
     echo -e "${GREEN}## RELOADING HEALTH DATA TO ENABLE UPDATES...${NC}"
     sudo netdatacli reload-health
     if [ $? == 0 ]; then
