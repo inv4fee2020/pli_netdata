@@ -3,10 +3,12 @@ Plugin node proactive monitoring with Netdata
 
 A brief guide on how to install and configure Netdata to your @GoPlugin node for proactive monitoring & alerting.
 
+---
 ### Accompanying video for visual aid.
 
 [Youtube Playlist : Plugin ($PLI ) Node - Proactive Monitoring - UpTimeRobot & NetData](https://www.youtube.com/watch?v=3EcVNHADik0&list=PL2_76-uvpc8xr4h22XCpayMVgdKPbhy2b)
 
+---
 ## Netdata : Register account & obtain 'claim-token'
 
   1. Register for a new account with Netdata on their '[sign up page](https://app.netdata.cloud/?utm_source=website&utm_content=top_navigation_sign_up)'
@@ -82,6 +84,30 @@ The following steps will now setup your VPS to report data into your Netdata 'Ge
   5. While the script restarts the netdata services in order to load the new changes, it is strongly recommeneded that you perform a full reboot of your VPS.  This is due to scenarios where the detection of changes in the plugin processes do not trigger notifications. A reboot resolves this.
 
 ---
+
+### What if I already have Netdata installed - How can I benefit from this update?
+
+Assuming you have made no customisations since installing NetData, then by simply following the above setup process and supplying the _'--claim-token'_ for the space where your existing node is defined e.g. by default this is the 'General' war room, the node will continue to be displayed as before, but will be re-installed with the new settings.
+
+### What settings are applied by this script?
+
+1. This script updates the main 'netdata.conf' file to implement the following settings;
+
+  - Sets polling to every 5 seconds (rather than the default every 1 second)
+  - Stores 30 days worth of data on the local disk which averages to about 2GB of data
+
+
+2. The script updates the 'apps_groups.conf' file to implement the config to define the plugin processes. It does this by adding the following lines under the '# other application servers' section;
+
+> pli-node: \*2_nodeStartPM2* \*startNode*
+> pli-ei: external-initiator \*3_initiatorStartPM2* \*startEI*
+
+
+3. The script then copies over the following alert configuration files to the 'health.d' folder where netdata reads conf file in order to produce the email notifications when the processes are not running.
+
+  - pli-node.conf
+  - pli-ei.conf
+
 
 
 ## Usage syntax
