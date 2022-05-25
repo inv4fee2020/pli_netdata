@@ -92,7 +92,7 @@ FUNC_SETUP_NETDATA(){
     sudo systemctl status netdata
     #sleep 3s
     #FUNC_ENABLE_HEALTH_MON;
-    #FUNC_EXIT;
+    FUNC_EXIT;
 }
 
 
