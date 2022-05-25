@@ -83,28 +83,32 @@ FUNC_SETUP_NETDATA(){
 
 
 
-    sudo cp /usr/lib/netdata/conf.d/apps_groups.conf /etc/netdata/apps_groups.conf
     NDATA_CONF_FILE="/etc/netdata/netdata.conf"
-    NDATA_APPS_FILE="/etc/netdata/apps_groups.conf"
 
     sudo sed -i.bak '/^.*history*/a \\n    process scheduling policy = idle\n    OOM score = 1000\n\n    dbengine multihost disk space = 1978\n    update every = 5\n\n[web]\n    web files owner = root\n    web files group = netdata\n\n    bind to = localhost' $NDATA_CONF_FILE
-    sudo sed -i.bak '/^freeswitch*/a \\npli-node: *2_nodeStartPM2* *startNode*\npli-ei: external-initiator* *3_initiatorStartPM2* *startEI*' $NDATA_APPS_FILE
     sudo systemctl unmask netdata.service
     sudo systemctl restart netdata
 
     sudo systemctl status netdata
     #sleep 3s
-    FUNC_ENABLE_HEALTH_MON;
+    #FUNC_ENABLE_HEALTH_MON;
     #FUNC_EXIT;
 }
 
 
 
-FUNC_ENABLE_HEALTH_MON(){
+FUNC_ENABLE_PLI_MON(){
 
     echo -e "${GREEN}#########################################################################"
     echo -e "${GREEN}## ENABLING NETDATA HEALTH MONITOR ALERTING...${NC}"
     
+
+
+    sudo cp /usr/lib/netdata/conf.d/apps_groups.conf /etc/netdata/apps_groups.conf
+    NDATA_APPS_FILE="/etc/netdata/apps_groups.conf"    
+    sudo sed -i.bak '/^freeswitch*/a \\npli-node: *2_nodeStartPM2* *startNode*\npli-ei: external-initiator* *3_initiatorStartPM2* *startEI*' $NDATA_APPS_FILE
+
+
     #echo "copies the default template conf file for common system metric"
 
     #HEALTH_CONFS=(cpu.conf memory.conf load.conf processes.conf disks.conf tcp_resets.conf tcp_conn.conf )
@@ -247,9 +251,9 @@ case "$1" in
                 #_OPTION="-conf"
                 FUNC_RECLAIM_TOKEN
                 ;;
-        -base-alerts)
+        -plimon)
                 #_OPTION="-conf"
-                FUNC_ENABLE_HEALTH_MON
+                FUNC_ENABLE_PLI_MON
                 ;;
         -reset)
                 #_OPTION="-conf"
