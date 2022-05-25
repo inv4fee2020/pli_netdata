@@ -268,7 +268,7 @@ case "$1" in
                 echo -e "${GREEN}where {function} is one of the following;${NC}"
                 echo 
                 echo -e "${GREEN}      -setup       ==  prompts for claim token id & installs netdata${NC}"
-                echo -e "${GREEN}      -base-alerts ==  enables base system health monitor alerting${NC}"
+                echo -e "${GREEN}      -plimon      ==  enables goplugin node health monitor alerting${NC}"
                 echo -e "${GREEN}      -reclaim     ==  removes the unique id to allow the node to be claimed again${NC}"
                 echo 
                 echo -e "${GREEN}      -reset       ==  **CAUTION** performs a hard reset of the netdata install removing all files${NC}"
