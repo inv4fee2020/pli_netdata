@@ -96,6 +96,16 @@ FUNC_SETUP_NETDATA(){
 }
 
 
+FUNC_UPDATE_NETDATA(){
+
+    echo -e "${GREEN}#########################################################################"
+    echo -e "${GREEN}## UPDATES / RE-INSTALLS EXISTING NETDATA...${NC}"
+    
+    sudo curl https://my-netdata.io/kickstart.sh > /tmp/netdata-kickstart.sh && sh /tmp/netdata-kickstart.sh --reinstall --non-interactive
+
+    FUNC_EXIT;
+}
+
 
 FUNC_ENABLE_PLI_MON(){
 
@@ -247,6 +257,9 @@ case "$1" in
                 #_OPTION="-setup"
                 FUNC_GET_CLAIMTOKEN
                 ;;
+        -update)
+                FUNC_UPDATE_NETDATA
+                ;;
         -reclaim)
                 #_OPTION="-conf"
                 FUNC_RECLAIM_TOKEN
@@ -268,6 +281,7 @@ case "$1" in
                 echo -e "${GREEN}where {function} is one of the following;${NC}"
                 echo 
                 echo -e "${GREEN}      -setup       ==  prompts for claim token id & installs netdata${NC}"
+                echo -e "${GREEN}      -update      ==  updates /reinstalls netdata${NC}"
                 echo -e "${GREEN}      -plimon      ==  enables goplugin node health monitor alerting${NC}"
                 echo -e "${GREEN}      -reclaim     ==  removes the unique id to allow the node to be claimed again${NC}"
                 echo 

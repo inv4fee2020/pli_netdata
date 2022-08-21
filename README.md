@@ -83,6 +83,26 @@ The following steps will now setup your VPS to report data into your Netdata 'Ge
 
   5. While the script restarts the netdata services in order to load the new changes, it is strongly recommeneded that you perform a full reboot of your VPS.  This is due to scenarios where the detection of changes in the plugin processes do not trigger notifications. A reboot resolves this.
 
+
+## Netdata : Updating the current installation
+
+When running the `-update` command the script will also apply necessary linux system updates necessary for the netdata update.
+
+When you reach the following section of the update, you will need to confirm the DEFAULT action to maintain your existing netdata.conf settings
+
+    Configuration file '/etc/netdata/netdata.conf'
+     ==> Modified (by you or by a script) since installation.
+     ==> Package distributor has shipped an updated version.
+       What would you like to do about it ?  Your options are:
+        Y or I  : install the package maintainer's version
+        N or O  : keep your currently-installed version
+          D     : show the differences between the versions
+          Z     : start a shell to examine the situation
+     The default action is to keep your current version.
+    *** netdata.conf (Y/I/N/O/D/Z) [default=N] ?
+
+Once you have confirmed this the update should continue with no further user interaction. You can then check the version within your netdata cloud portal.
+
 ---
 
 ### What if I already have Netdata installed - How can I benefit from this update?
@@ -119,6 +139,7 @@ Basic script syntax;
     where {function} is one of the following;
 
           -setup       ==  prompts for claim token id & installs netdata
+          -update      ==  updates /reinstalls netdata with existing config
           -base-alerts ==  enables base system health monitor alerting
           -reclaim     ==  removes the unique id to allow the node to be claimed again
 
